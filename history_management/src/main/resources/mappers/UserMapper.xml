@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.subject.dao.UserDaoInterface">
+  		
+  <select id="checkUserLoginExist" parameterType="String" resultType="kr.co.subject.dto.User">
+    	SELECT * FROM user_info
+    	WHERE ID = #{ID} AND PW = #{PW}
+  </select>
+  
+  <select id="selectByUserIdx" parameterType="int" resultType="kr.co.subject.dto.User">				
+    	SELECT * FROM user_info
+  		WHERE IDX = #{userIdx}
+  </select>
+  
+  <select id="selectByUserId" parameterType="String" resultType="kr.co.subject.dto.User">				
+    	SELECT * FROM user_info
+  		WHERE ID = #{userId}
+  </select>
+   
+  <select id="selectByUserPw" parameterType="String" resultType="kr.co.subject.dto.User">				
+    	SELECT * FROM user_info
+  		WHERE PW = #{userPw}
+  </select>
+  
+  <select id="selectByUserEmail" parameterType="String" resultType="kr.co.subject.dto.User">				
+    	SELECT * FROM user_info
+  		WHERE EMAIL = #{userEmail}
+  </select>
+  
+  <select id="selectByUserPhone" parameterType="String" resultType="kr.co.subject.dto.User">				
+    	SELECT * FROM user_info
+  		WHERE PHONE = #{userPhone}
+  </select>
+  
+  <insert id="createUserNewAccount" parameterType="String">				
+    	INSERT INTO user_info
+    	(ID, PW, EMAIL, PHONE, NAME, LEVEL, STATUS)
+    	VALUES
+    	(#{ID}, #{PW}, #{EMAIL}, #{PHONE}, #{NAME}, 1, 1);
+  </insert>
+  
+  <select id="selectAllGroupInfo" parameterType="String" resultType="kr.co.subject.dto.Group">				
+    	SELECT * FROM group_info
+  		WHERE IDX = #{groupIdxOfUser};
+  </select>
+</mapper>

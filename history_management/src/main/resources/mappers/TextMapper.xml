@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.subject.dao.TextDaoInterface"><!--namespace를 통해 UserDAO와 연결합니다. -->
+  		
+  <insert id="addText" parameterType="String">
+				
+    	INSERT INTO text_info
+    	(HISTORY_ID, CONTENTS, UPDATED_TIME, USER_ID)
+    	VALUES
+    	(#{historyIdx}, #{contents}, now(), #{userIdx});
+    	
+  </insert>
+  
+  <select id="selectAllTextInfo" parameterType="String" resultType="kr.co.subject.dto.Text">
+    	SELECT * FROM text_info WHERE HISTORY_ID = #{historyIdx};
+  </select>
+</mapper>

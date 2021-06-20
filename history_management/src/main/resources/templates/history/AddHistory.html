@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>YJwork</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/css/myHistory.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="header">
+			<div class="header_mid_sort">
+				<h1 id="title_link"><a href="/main">YJwork</a></h1>
+			</div>
+		</div>
+		<div class="container">
+			<div class="container_mid_sort">
+				<div id="title_wrap"><h1 id="title">히스토리 추가</h1></div>
+				<div id="text_form_container">
+					<form action="/history/AddHistory" method="POST">
+						<input type="hidden" th:value="${groupViewIdx}" name="groupViewIdx">
+						<div id="text_form"><input type="text" name="contents_text"></div>
+						<div id="submit_btn_div"><input type="submit" value="완료"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_mid_sort">
+				<span id="footer_discription">개발자 문의 이메일 dbswhddnr456@naver.com &nbsp;&nbsp;&nbsp; 운용자 문의 이메일 example@naver.com</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

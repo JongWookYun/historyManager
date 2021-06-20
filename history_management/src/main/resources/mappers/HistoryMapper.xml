@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.subject.dao.HistoryDaoInterface"><!--namespace를 통해 UserDAO와 연결합니다. -->
+  		
+  <insert id="createHistory" parameterType="String">
+				
+    	INSERT INTO history_info
+    	(GROUP_ID, FILE_ID, TEXT_ID, USER_ID, UPDATED_TIME)
+    	VALUES
+    	(#{groupDBIdx}, 0, 0, #{userDBIdx}, now());
+    	
+  </insert>		
+  	
+  <select id="selectHistory" parameterType="String" resultType="kr.co.subject.dto.History">
+    	SELECT * FROM history_info WHERE USER_ID = #{userIdx} ORDER BY IDX DESC LIMIT 1;
+  </select>
+
+	<select id="selectByGroupIdx" parameterType="String" resultType="kr.co.subject.dto.History">
+    	SELECT * FROM history_info WHERE GROUP_ID = #{groupIdx} ORDER BY IDX DESC;
+  </select>
+</mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>create new Account</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../css/newAccount.css">
+</head>
+<body>
+
+	<div class="wrap">
+		<div class="header">
+			<div class="header_mid_sort"></div>
+		</div>
+		<div class="container">
+			<div class="container_mid_sort">
+				<div class="newAccount_container">
+					<h1 id="title_link"><a href="/login">YJwork</a></h1>
+					<form action="/user/newAccount" method="POST">
+						<div class="input_text_div"><input class="text_input" type="text" placeholder="ID" name="ID" id="ID" value="" ></div>
+						<div class="input_text_div"><input class="text_input" type="text" placeholder="PW" name="PW" id="PW" value=""></div>
+						<div class="input_text_div"><input class="text_input" type="text" placeholder="EMAIL" name="EMAIL" id="EMAIL" value=""></div>
+						<div class="input_text_div"><input class="text_input" type="text" placeholder="PHONE" name="PHONE" id="PHONE" value=""></div>
+						<div class="input_text_div"><input class="text_input" type="text" placeholder="NAME" name="NAME" id="NAME" value=""></div>
+						<div class="input_submit_div"><input type="submit" value="회원가입"></input></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_mid_sort">
+				<span id="footer_discription">개발자 문의 이메일 dbswhddnr456@naver.com &nbsp;&nbsp;&nbsp; 운용자 문의 이메일 example@naver.com</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.subject.dao.GroupDaoInterface"><!--namespace를 통해 UserDAO와 연결합니다. -->
+  
+  <select id="fillterWithIdx" parameterType="String" resultType="kr.co.subject.dto.Group">
+				
+    	SELECT * FROM group_info
+  		WHERE IDX = #{IDX};
+    
+  </select>
+  
+  <select id="fillterWithMaker" parameterType="String" resultType="kr.co.subject.dto.Group">
+				
+    	SELECT * FROM group_info
+  		WHERE MAKER = #{MAKER};
+    
+  </select>
+  
+  <select id="fillterWithMadeDate" parameterType="String" resultType="kr.co.subject.dto.Group">
+				
+    	SELECT * FROM group_info
+  		WHERE MADE_DATE = #{MADE_DATE};
+    
+  </select>
+  
+  <select id="fillterWithGroupName" parameterType="String" resultType="kr.co.subject.dto.Group">
+				
+    	SELECT * FROM group_info
+  		WHERE GROUP_NAME = #{GROUP_NAME};
+    
+  </select>
+  
+    <select id="fillterWithJoinCode" parameterType="String" resultType="kr.co.subject.dto.Group">
+				
+    	SELECT * FROM group_info
+  		WHERE JOIN_CODE = #{JOIN_CODE};
+    
+  </select>
+  
+  <insert id="createGroup" parameterType="String">				
+
+    	INSERT INTO group_info
+    	(MAKER, MADE_DATE, GROUP_NAME, JOIN_CODE, STATUS)
+    	VALUES
+    	(#{MAKER}, now(), #{GROUP_NAME}, NULL, 1);
+		
+  </insert>
+  
+   
+  <update id="insertGroupIdIntoUser" parameterType="String">				
+
+    	UPDATE user_info SET GROUP_ID = #{GROUP_ID}
+    	WHERE IDX = #{MAKER}
+		
+  </update>
+
+</mapper>

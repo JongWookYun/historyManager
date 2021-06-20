@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>YJwork</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/css/myGroup.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		function addHistoryOnClick() {
+			var groupViewIdx = window.location.search.split("?groupViewIdx=")[1];
+			location.href = "/history/AddHistory?groupViewIdx=" + groupViewIdx;
+		}
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="header">
+			<div class="header_mid_sort">
+				<h1 id="title_link"><a href="/main">YJwork</a></h1>
+				<div id="addHistory"><input type="button" class="btn btn-primary btn-lg sharp" value="히스토리 추가" onclick="addHistoryOnClick();"></div>
+				<div id="createJoinCode"><input type="button" class="btn btn-primary btn-lg sharp" value="참여코드 생성" onclick="createJoinCodeOnClick();"></div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="container_mid_sort">
+				<div class="sort" id="group_name_title"><h1 th:text="'그룹 이름: ' + ${groupInfo.GROUP_NAME}"></h1></div>
+				<div class="sort" id="maker_title"><h2 th:text="'관리자: ' + ${userInfo.NAME}"></h2></div>
+				<div class="sort"><h4 th:text="'생성일: ' + ${groupInfo.MADE_DATE}"></h4></div>
+				
+				<div class="history_wrap">
+					<div th:each="textInfo : ${textInfo}" class="child_history">
+						<a th:text="${#strings.defaultString(textInfo.CONTENTS, 'no history')}" class="child_history_link" th:onclick="clickedGroup();"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_mid_sort">
+				<span id="footer_discription">개발자 문의 이메일 dbswhddnr456@naver.com &nbsp;&nbsp;&nbsp; 운용자 문의 이메일 example@naver.com</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

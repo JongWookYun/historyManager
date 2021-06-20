@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>YJwork</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		function createGroupButtonOnClick() {
+			var gName = {GROUP_NAME: prompt("생성할 그룹이름")};
+			
+			if (gName['GROUP_NAME']) {
+				$(document).ready(function() {
+					$.post("/validateGroupName", {"gName": gName['GROUP_NAME']}, function(data) {
+						if(data == "success") {
+							alert("그룹 생성 완료");
+						} else {
+							alert("해당 그룹은 생성할 수 없습니다.");
+						}
+					}).fail(function(error) {
+						console.log(error);
+					});
+				})
+			}
+		}
+		
+		function joniGroupButtonOnClick() {
+			console.log("joniGroupButtonOnClick()");
+		}
+		
+		function clickedGroup() {
+			var groupListTag = document.getElementsByClassName('groupIdx');
+			
+			for (var i = 0; i < groupListTag.length; i++) {
+				(function(groupViewIdx) {
+					groupListTag[i].onclick = function() {
+						location.href = "/group/myGroup?groupViewIdx=" + groupViewIdx;
+					}
+				})(i);
+			}     	
+		}
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="header">
+			<div class="header_mid_sort">
+				<div class="user"><a href="user_info.html"><img src="/img/user.png" alt="user_img"></a></div>
+				<div class="uploader"><a href="file/upload"><img src="/img/file.png" alt="upload_img"></a></div>
+				<div class="search"><span class="icon"><i class="fa fa-search"></i></span><input id="search" type="text" ></div>
+				
+				<div id="createGroup"><input type="button" class="btn btn-primary btn-lg sharp" value="그룹 생성" onclick="createGroupButtonOnClick();"></div>
+				<div id="joinGroup"><input type="button" class="btn btn-primary btn-lg sharp" value="그룹 참여" onclick="joniGroupButtonOnClick();"></div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="container_mid_sort">
+				<div class="myFile">myFile</div>
+				<div class="groupList_container">
+				<div class="groupList_more"><a href="#">더보기</a></div>
+					<div class="groupList_grid_container" >
+						<div th:each="PartOfAllGroupInfo : ${PartOfAllGroupInfo}" class="groupList_grid">
+							<a th:text="${#strings.defaultString(PartOfAllGroupInfo.GROUP_NAME, 'nothing')}" class="groupIdx" th:onclick="clickedGroup();">asdfsdaf</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_mid_sort">
+				<span id="footer_discription">개발자 문의 이메일 dbswhddnr456@naver.com &nbsp;&nbsp;&nbsp; 운용자 문의 이메일 example@naver.com</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

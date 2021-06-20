@@ -1,0 +1,146 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+    min-width: 1190px;
+    font-size: 12px;
+}
+
+body {
+    background: #e9f0f7;    
+}
+
+div.wrap {
+    min-height: 100%;
+}
+
+div.header {
+	position: relative;
+	/* border: 1px solid black; */
+	height: 80px;
+}
+
+div.header_mid_sort {
+	position: relative;
+	margin: 0 200px;
+	/* border: 1px solid black; */
+	height: 100%;
+}
+
+div.container {
+	/* border: 1px solid black; */
+	position: relative;
+}
+
+div.container_mid_sort {
+	position: relative;
+	width: 600px;
+	height: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+div.footer {
+	position: relative;
+	/* border: 1px solid black; */
+	border-top: 1px solid #B5B3B3;
+	height: 70px;
+	text-align: center;
+}
+
+div.footer_mid_sort {
+	position: relative;
+	height: 100%;
+	margin: 0 200px;
+	text-align: center;
+}
+
+div.form-id {
+	padding: 80px 0px 10px 0px;
+}
+
+div.form-submit {
+	padding: 20px 0px 28px 0px;
+}
+
+div.form-submit input{
+	width: 100px;
+}
+
+span#footer_discription {
+	line-height: 70px;
+}
+
+span.help a {
+	text-decoration: none;
+	color: #848080;
+	line-height: 40px;
+}
+
+hr#login_under_line {
+	width: 400px;
+	margin: 0 auto;
+	border-bottom: none;
+}
+
+h1#title_link {
+	font-size: 54px;
+}
+
+h1#title_link a{
+	text-decoration: none;
+	color: #3CB371;
+	font-family: 'Montserrat', sans-serif;
+}
+
+
+input.text_input {
+  width: 300px;
+  padding: 10px 20px;
+  border-color: transparent;
+  border-bottom: 2px solid #A9BCF5;
+  font-size: 15px;
+  background-color: #e9f0f7;
+}
+
+input.text_input::-webkit-input-placeholder {
+    padding-left: 5px;
+    font-size: 15px;
+}
+ 
+input.text_input:-moz-placeholder { /* Firefox 18- */
+    padding-left: 5px;
+    font-size: 15px;
+}
+ 
+input.text_input::-moz-placeholder {  /* Firefox 19+ */
+    padding-left: 5px;
+    font-size: 15px;
+}
+ 
+input.text_input:-ms-input-placeholder {
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+input:focus {
+	outline: none;
+}
+
+input[type=submit] {
+  background-color: #0693cd;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-size:16px;
+  font-weight: bold;
+  line-height: 1.4;
+  padding: 10px;
+  width: 180px;
+}
