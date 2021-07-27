@@ -5,12 +5,53 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" href="/css/myGroup.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script>
+		//var groupViewIdx = window.location.search.split("?groupViewIdx=")[1];
+		var groupViewIdxParam = window.location.search.split("?")[1];
+		
+		
 		function addHistoryOnClick() {
-			var groupViewIdx = window.location.search.split("?groupViewIdx=")[1];
+			var groupViewIdx = groupViewIdxParam.split("groupViewIdx=")[1];
 			location.href = "/history/AddHistory?groupViewIdx=" + groupViewIdx;
 		}
+		
+		function createJoinCodeOnClick() {
+			console.log(groupViewIdxParam);
+			var groupViewIdx = groupViewIdxParam.split("groupViewIdx=")[1];
+			console.log(groupViewIdx);
+			
+			$(document).ready(function() {
+					$.post("/createJoinCodeToGroup", {"groupViewIdx": groupViewIdx}, function(data) {
+						if(data == "success_to_create_join_code") {
+							alert("그룹 참여 코드 생성 완료");
+						} else if(data == "exist_join_code") {
+							alert("그룹 참여 코드가 이미 존재합니다.");
+						} else if(data == "lack_of_level_privileges") {
+							alert("생성 권한이 없습니다. 관리자에게 문의하세요.");
+						} else {
+							alert("unknown case");
+						}
+					}).fail(function(error) {
+						console.log(error);
+					});
+				})
+		}
+		
+		function clickToDownload(fileIdx) {
+			
+			$(document).ready(function() {
+					$.post("/download/file", {"fileIdx": fileIdx}, function(data) {
+						if(data == "fail_to_download") {
+							alert("파일 저장 실패");
+						}
+					}).fail(function(error) {
+						console.log(error);
+					});
+				})
+		}
+			
 	</script>
 </head>
 <body>
@@ -27,12 +68,37 @@
 				<div class="sort" id="group_name_title"><h1 th:text="'그룹 이름: ' + ${groupInfo.GROUP_NAME}"></h1></div>
 				<div class="sort" id="maker_title"><h2 th:text="'관리자: ' + ${userInfo.NAME}"></h2></div>
 				<div class="sort"><h4 th:text="'생성일: ' + ${groupInfo.MADE_DATE}"></h4></div>
-				
+			<!--
 				<div class="history_wrap">
-					<div th:each="textInfo : ${textInfo}" class="child_history">
-						<a th:text="${#strings.defaultString(textInfo.CONTENTS, 'no history')}" class="child_history_link" th:onclick="clickedGroup();"></a>
-					</div>
+						<div th:each="textInfo : ${textInfo}" class="child_history">
+						<p th:text="${#strings.defaultString(textInfo.CONTENTS, 'no text')}" class="child_history_link" th:onclick="clickedGroup();" style="font-size: 30px; position: absolute; display: inline; left: 0;"></p>
+						<p th:text="${textInfo.UPDATED_TIME}" style="position: absolute; display: inline; right: 0;"></p>
 				</div>
+				-->
+				
+				<table class="tb_col" style="margin: auto; border: 1px solid black; border-collapse: collapse;">
+					<tr th:each="historyInfo, iter : ${historyInfo}" style="border: 1px solid black;">
+						<td>
+							<span th:text="|${textInfo[idx].CONTENTS}|" th:with="idx=${iter.index}"></span>
+							<span th:switch="|${fileName}|" th:with="idx=${iter.index}, fileName=${fileInfo[idx].FILENAME}">
+								<span th:case="''">empty</span>
+								<span th:case="*">
+									<a th:onclick="|clickToDownload('${fileIdx}')|" th:with="fileIdx=${fileInfo[idx].IDX}"><i class="fas fa-file"></i></a>
+									<!-- th:href="@{/download/file?fileIdx='abc'}" -->
+								</span>
+							</span>
+							<!--<span th:text="|${fileInfo[value].FILENAME}|" th:with="value=${iter.index}"></span>-->
+							<span th:text="|${#strings.substring(UPDATED_TIME,0,16)}|" th:with="UPDATED_TIME=${historyInfo.UPDATED_TIME}"></span>
+						</td>
+						<!--<td th:text="${iter.index}"></td>-->
+						<!--
+						<td  style="border: 1px solid black;"></td>
+						<td  style="border: 1px solid black;"></td>
+						<td  style="border: 1px solid black;"></td>
+						-->
+						<!-- <td th:text="|${fileInfo[value].FILENAME}|" th:with="value=${iter.index}" style="border: 1px solid black;"></td> -->
+					</tr>
+				</table>
 			</div>
 		</div>
 		<div class="footer">

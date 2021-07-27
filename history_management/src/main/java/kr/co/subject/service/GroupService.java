@@ -27,6 +27,14 @@ public class GroupService {
 		return ObjectUtils.isEmpty(group);
 	}
 	
+	public boolean userLevelCheck() {
+		if(userService.getUserMemoryStore().getLEVEL() <= 1) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public void createNewGroup(String GROUP_NAME) throws Exception{
 		int MAKER = userService.getUserMemoryStore().getIDX();
 		groupDaoInterface.createGroup(Integer.toString(MAKER),GROUP_NAME);
@@ -45,5 +53,9 @@ public class GroupService {
 		} else {
 			groupDaoInterface.insertGroupIdIntoUser(Integer.toString(MAKER), GROUP_ID + "," + Integer.toString(GROUP_IDX));
 		}
+	}
+	
+	public void createJoinCodeToGroup(String groupIdx, String joinCode) throws Exception {
+		groupDaoInterface.createJoinCodeToGroup(groupIdx, joinCode);
 	}
 }

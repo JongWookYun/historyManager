@@ -4,7 +4,7 @@
 
 <mapper namespace="kr.co.subject.dao.GroupDaoInterface"><!--namespace를 통해 UserDAO와 연결합니다. -->
   
-  <select id="fillterWithIdx" parameterType="String" resultType="kr.co.subject.dto.Group">
+  <select id="fillterWithGroupIdx" parameterType="String" resultType="kr.co.subject.dto.Group">
 				
     	SELECT * FROM group_info
   		WHERE IDX = #{IDX};
@@ -53,6 +53,13 @@
 
     	UPDATE user_info SET GROUP_ID = #{GROUP_ID}
     	WHERE IDX = #{MAKER}
+		
+  </update>
+
+  <update id="createJoinCodeToGroup" parameterType="String">				
+
+    	UPDATE group_info SET JOIN_CODE = #{JOIN_CODE}
+    	WHERE IDX = #{IDX}
 		
   </update>
 

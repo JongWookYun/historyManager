@@ -29,6 +29,26 @@ public class UserService {
 		System.out.println("UserService: tryLogin()");
 		
 		User user = userDaoInterface.checkUserLoginExist(userId, userPw); // 아이디, 비밀번호로 조회 후 user 객체에 담는다.
+		System.out.println("===============================================");
+		
+		try {
+		
+			System.out.println("IDX: " + user.getID());
+			System.out.println("GROUP_ID: " + user.getGROUP_ID());
+			System.out.println("ID: " + user.getID());
+			System.out.println("PW: " + user.getPW());
+			System.out.println("EMAIL: " + user.getEMAIL());
+			System.out.println("PHONE: " + user.getPHONE());
+			System.out.println("NAME: " + user.getNAME());
+			System.out.println("LEVEL: " + user.getLEVEL());
+			System.out.println("STATUS: " + user.getSTATUS());
+		
+		} catch (NullPointerException e) {
+			System.out.println(e);
+		}
+		
+		System.out.println("===============================================");
+		
 		
 		if(ObjectUtils.isEmpty(user)) {	// user 객체 null 판단
 			return "not exist";	// null일 시 회원정보가 없기 때문에 not exist return.

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.subject.dao.UserDaoInterface;
+import kr.co.subject.dto.FileDto;
 import kr.co.subject.dto.Group;
 import kr.co.subject.dto.History;
 import kr.co.subject.dto.Text;
 import kr.co.subject.dto.User;
+import kr.co.subject.service.FileService;
 import kr.co.subject.service.GroupService;
 import kr.co.subject.service.HistoryService;
 import kr.co.subject.service.TextService;
@@ -34,6 +36,9 @@ public class ViewController {
 	
 	@Autowired
 	private TextService textService;
+	
+	@Autowired
+	private FileService fileService;
 	
 	@Autowired
 	SqlSession session;
@@ -68,14 +73,20 @@ public class ViewController {
 		User WhoMadeThisGroup = userService.selectByUserIdx(ClickedGroupInfo.getMAKER());
 		
 		historyService.setAllHistoryInfoOfOneGroup(ClickedGroupInfo.getIDX(), session);
-		List<History> HistoryInfoOfThisGroup = historyService.getPartOfHistoryInfoOfOneGroup();
+		List<History> HistoryInfoOfThisGroup = historyService.getAllHistoryInfoOfOneGroup();
+		
 		textService.setTextInfoOfHistory(HistoryInfoOfThisGroup);
-		List<Text> TextInfoOfThisHistory = textService.getPartOfTextInfoOfHistory();
+		List<Text> TextInfoOfThisHistory = textService.getAllTextInfoOfHistory();
+		
+		fileService.setFileInfoOfHistory(HistoryInfoOfThisGroup);
+		List<FileDto> FileInfoOfThisHistory = fileService.getAllFileInfoOfHistory();
 		
 		
 		model.addAttribute("groupInfo", ClickedGroupInfo);
 		model.addAttribute("userInfo", WhoMadeThisGroup);
+		model.addAttribute("historyInfo", HistoryInfoOfThisGroup);
 		model.addAttribute("textInfo", TextInfoOfThisHistory);
+		model.addAttribute("fileInfo", FileInfoOfThisHistory);
 		
 		return "/group/myGroup";
 	}

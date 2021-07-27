@@ -41,11 +41,11 @@ public class HistoryService {
 		System.out.println("HistoryService: setHistoryInfoOfOneGroup()");
 		
 		AllHistoryInfoOfOneGroup = new ArrayList<History>();
-		PartOfHistoryInfoOfOneGroup = new ArrayList<History>(4);
+		PartOfHistoryInfoOfOneGroup = new ArrayList<History>(30);
 		
 		try {
 			AllHistoryInfoOfOneGroup = session.selectList("selectByGroupIdx", Integer.toString(groupIdx));
-			for(int i = 0; i < 4; i++) {
+			for(int i = 0; i < 30; i++) {
 				PartOfHistoryInfoOfOneGroup.add(AllHistoryInfoOfOneGroup.get(i));
 			}
 			System.out.println("AllHistoryInfoOfOneGroup size: " + AllHistoryInfoOfOneGroup.size());
@@ -58,7 +58,7 @@ public class HistoryService {
 		
 	}
 	
-	public List<History> getAllHistoryInfoOfOneGroup(History history) {
+	public List<History> getAllHistoryInfoOfOneGroup() {
 		return AllHistoryInfoOfOneGroup;
 	}
 	

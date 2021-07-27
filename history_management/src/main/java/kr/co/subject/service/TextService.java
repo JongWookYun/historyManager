@@ -20,33 +20,33 @@ public class TextService {
 	@Autowired
 	private TextDaoInterface textDaoInterface;
 	
-	List<Text> AllfTextInfoOfHistory;
+	List<Text> AllOfTextInfoOfHistory;
 	List<Text> PartOfTextInfoOfHistory;
 	
 	public void setTextInfoOfHistory(List<History> historyInfo) throws Exception {
 		System.out.println("TextService: setTextInfoOfHistory()");
 		
-		AllfTextInfoOfHistory = new ArrayList<Text>();
-		PartOfTextInfoOfHistory = new ArrayList<Text>(4);
+		AllOfTextInfoOfHistory = new ArrayList<Text>();
+		PartOfTextInfoOfHistory = new ArrayList<Text>(30);
 		System.out.println("historyInfo's size: " + historyInfo.size());
 		
 		
 		if(historyInfo.size() != 0) {
 			for(int i = 0; i < historyInfo.size() ;i++) {
-				AllfTextInfoOfHistory.add(textDaoInterface.selectAllTextInfo(Integer.toString(historyInfo.get(i).getIDX())));
+				AllOfTextInfoOfHistory.add(textDaoInterface.selectAllTextInfo(Integer.toString(historyInfo.get(i).getIDX())));
 				if(i < 4) {
-					PartOfTextInfoOfHistory.add(AllfTextInfoOfHistory.get(i));
+					PartOfTextInfoOfHistory.add(AllOfTextInfoOfHistory.get(i));
 				} else {
 					continue;
 				}
 			}
-			System.out.println("AllfTextInfoOfHistory size: " + AllfTextInfoOfHistory.size());
+			System.out.println("AllfTextInfoOfHistory size: " + AllOfTextInfoOfHistory.size());
 			System.out.println("PartOfTextInfoOfHistory size: " + PartOfTextInfoOfHistory.size());
 		}
 	}
 	
-	public List<Text> getAllfTextInfoOfHistory() {
-		return AllfTextInfoOfHistory;
+	public List<Text> getAllTextInfoOfHistory() {
+		return AllOfTextInfoOfHistory;
 	}
 	
 	public List<Text> getPartOfTextInfoOfHistory() {

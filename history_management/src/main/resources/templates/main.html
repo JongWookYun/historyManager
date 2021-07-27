@@ -13,10 +13,14 @@
 			if (gName['GROUP_NAME']) {
 				$(document).ready(function() {
 					$.post("/validateGroupName", {"gName": gName['GROUP_NAME']}, function(data) {
-						if(data == "success") {
+						if(data == "not_exist_group_name") {
 							alert("그룹 생성 완료");
+						} else if(data == "exist_group_name") {
+							alert("이미 존재하는 그룹이름입니다.");
+						} else if(data == "lack_of_level_privileges") {
+							alert("생성 권한이 없습니다. 관리자에게 문의하세요.");
 						} else {
-							alert("해당 그룹은 생성할 수 없습니다.");
+							alert("unknown case");
 						}
 					}).fail(function(error) {
 						console.log(error);
@@ -61,7 +65,7 @@
 				<div class="groupList_more"><a href="#">더보기</a></div>
 					<div class="groupList_grid_container" >
 						<div th:each="PartOfAllGroupInfo : ${PartOfAllGroupInfo}" class="groupList_grid">
-							<a th:text="${#strings.defaultString(PartOfAllGroupInfo.GROUP_NAME, 'nothing')}" class="groupIdx" th:onclick="clickedGroup();">asdfsdaf</a>
+							<a th:text="${#strings.defaultString(PartOfAllGroupInfo?.GROUP_NAME, 'nothing')}" class="groupIdx" th:onclick="clickedGroup();">asdfsdaf</a>
 						</div>
 					</div>
 				</div>

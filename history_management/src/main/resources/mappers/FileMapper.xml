@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.subject.dao.FileDaoInterface"><!--namespace를 통해 UserDAO와 연결합니다. -->
+
+  <insert id="addFile" parameterType="String">
+				
+    	INSERT INTO file_info
+    	(HISTORY_ID, FILENAME, FILEPATH, UPDATED_TIME, USER_ID)
+    	VALUES
+    	(#{historyIdx}, #{fileName}, #{filePath}, now(), #{userIdx});
+    	
+  </insert>
+  
+
+  <select id="selectAllFileInfo" parameterType="String" resultType="kr.co.subject.dto.FileDto">
+    	SELECT * FROM file_info WHERE HISTORY_ID = #{historyIdx};
+  </select>
+
+</mapper>
